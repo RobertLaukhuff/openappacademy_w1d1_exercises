@@ -52,16 +52,43 @@ class Array
 
   def my_zip(*args)
     all_arrays = [self, *args]
-    size = self.length
+    size_of_self = self.length
     results = []
 
-    (0...size).each do |idx1|
+    (0...size_of_self).each do |idx1|
       prepared_array = []
-      (0...size).each do |idx2|
+      (0...size_of_self).each do |idx2|
         prepared_array << all_arrays[idx2][idx1]
       end
       results << prepared_array
     end
     results
+  end
+
+  def my_rotate(rotations = 1)
+    rotated_array = self
+    if rotations > 0
+      rotations.times {rotated_array.push(rotated_array.shift)}
+    else
+      rotations *= -1
+      rotations.times {rotated_array.unshift(rotated_array.pop)}
+    end
+
+    rotated_array
+  end
+
+  def my_join(separator = '')
+    joined_string = ''
+    self.each do |value|
+      joined_string += value + separator
+    end
+    joined_string
+  end
+
+  def my_reverse
+    reversed_array = []
+    self.each {|value| reversed_array.unshift(value)}
+    
+    reversed_array
   end
 end
