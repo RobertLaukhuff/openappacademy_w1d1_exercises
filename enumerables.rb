@@ -40,4 +40,28 @@ class Array
     end
     true
   end
+  
+  def my_flatten
+    return [self] if !self.is_a?(Array)
+    flattened_array = []
+    self.each do |arr|
+      flattened_array += arr.my_flatten
+    end
+    flattened_array
+  end
+
+  def my_zip(*args)
+    all_arrays = [self, *args]
+    size = self.length
+    results = []
+
+    (0...size).each do |idx1|
+      prepared_array = []
+      (0...size).each do |idx2|
+        prepared_array << all_arrays[idx2][idx1]
+      end
+      results << prepared_array
+    end
+    results
+  end
 end
